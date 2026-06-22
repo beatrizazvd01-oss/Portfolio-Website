@@ -3,327 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beatriz Azevedo | Industrial Design Portfolio</title>
+    <title>Beatriz Azevedo | Portfolio 2026</title>
     <style>
+        /* CSS RESET & THEME */
         :root {
-            --black: #1a1a1a;
-            --grey-dark: #4a4a4a;
-            --grey-light: #f0f0f0;
+            --black: #000000;
             --white: #ffffff;
-            --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            --grey-light: #f2f2f2;
+            --grey-mid: #666666;
+            --line-weight: 1px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--white);
             color: var(--black);
-            line-height: 1.5;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Industrial Line Accents (from cover) --- */
-        .line-accent {
+        /* THE DOUBLE LINE BORDER (From your Cover Page) */
+        body::before, body::after {
+            content: "";
             position: fixed;
-            top: 2rem;
-            bottom: 2rem;
-            width: 1px;
+            top: 5vh;
+            bottom: 5vh;
+            width: var(--line-weight);
             background: var(--black);
-            z-index: 1001;
+            z-index: 100;
         }
-        .line-left { left: 2.5%; }
-        .line-left-inner { left: 3%; }
-        .line-right { right: 2.5%; }
-        .line-right-inner { right: 3%; }
+        body::before { left: 40px; box-shadow: 8px 0 0 var(--black); } /* Double line left */
+        body::after { right: 40px; box-shadow: -8px 0 0 var(--black); } /* Double line right */
 
-        /* --- Navigation --- */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2.5rem 10%;
+            padding: 50px 10%;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(5px);
         }
 
-        .logo {
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
+        .logo { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .nav-links a { text-decoration: none; color: var(--black); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; margin-left: 30px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--grey-mid); }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--black);
-            margin-left: 2rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover { color: var(--grey-dark); border-bottom: 1px solid var(--black); }
-
-        /* --- Hero --- */
+        /* HERO SECTION */
         header {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 10%;
+            align-items: center;
+            text-align: center;
+            padding: 0 15%;
         }
 
-        .pre-title { font-size: 0.9rem; letter-spacing: 5px; color: var(--grey-dark); text-transform: uppercase; margin-bottom: 1rem; }
-        
-        h1 {
-            font-size: clamp(3.5rem, 10vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-        }
+        .hero-title { font-size: clamp(4rem, 12vw, 9rem); font-weight: 900; line-height: 0.8; letter-spacing: -4px; text-transform: uppercase; }
+        .hero-subtitle { margin-top: 20px; letter-spacing: 10px; text-transform: uppercase; font-size: 0.8rem; color: var(--grey-mid); }
+        .hero-name { margin-top: 40px; letter-spacing: 5px; font-weight: 300; text-transform: uppercase; font-size: 1.1rem; }
 
-        .hero-info {
-            display: flex;
-            margin-top: 2rem;
-            gap: 4rem;
-        }
+        /* SECTION HEADERS */
+        .section-label { padding: 150px 10% 30px; font-size: 2rem; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #eee; }
 
-        .hero-info div p { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
-
-        /* --- Projects Grid --- */
-        .section-header {
-            padding: 4rem 10% 2rem;
-            font-size: 2rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            border-bottom: 1px solid var(--grey-light);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            border-left: 1px solid var(--grey-light);
-        }
-
-        .project-card {
-            border-right: 1px solid var(--grey-light);
-            border-bottom: 1px solid var(--grey-light);
-            position: relative;
-            aspect-ratio: 16 / 10;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: var(--transition);
-        }
-
-        .project-details {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .project-details h3 { text-transform: uppercase; font-size: 1.5rem; }
-        .project-details p { font-size: 0.8rem; color: var(--grey-dark); letter-spacing: 1px; }
-
-        .project-card:hover .project-img { transform: scale(1.03); filter: grayscale(0%); opacity: 0.2; }
-        .project-card:hover .project-details { opacity: 1; transform: translateY(-10px); }
-
-        /* --- About & Skills --- */
-        .content-section {
-            padding: 8rem 10%;
+        /* PROJECT GRID */
+        .project-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10%;
+            border-bottom: 1px solid #eee;
+            min-height: 80vh;
         }
 
-        .about-text h2 { font-size: 2rem; margin-bottom: 2rem; text-transform: uppercase; }
-        .about-text p { margin-bottom: 1.5rem; color: var(--grey-dark); font-size: 1.1rem; }
+        .project-info { padding: 10%; display: flex; flex-direction: column; justify-content: center; }
+        .project-num { font-size: 5rem; font-weight: 900; color: #e0e0e0; line-height: 1; margin-bottom: 10px; }
+        .project-title { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+        .project-desc { color: var(--grey-mid); line-height: 1.6; font-size: 1rem; margin-bottom: 30px; }
+        
+        .project-visual { 
+            position: relative; 
+            overflow: hidden; 
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .project-row:hover .project-visual img { filter: grayscale(0%); transform: scale(1.05); }
 
+        /* ABOUT SECTION */
+        .about-container {
+            padding: 150px 10%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+        .about-image { width: 100%; filter: grayscale(100%); border: 1px solid #eee; }
+        .about-content h2 { font-size: 3rem; text-transform: uppercase; margin-bottom: 30px; }
+        .about-content p { font-size: 1.1rem; color: var(--grey-mid); margin-bottom: 20px; line-height: 1.8; }
+
+        /* SKILLS ICONS (Text based for now) */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 10px;
+            margin-top: 50px;
         }
+        .skill-box { border: 1px solid #000; padding: 15px; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; text-align: center; }
 
-        .skill-item {
-            padding: 1rem;
-            border: 1px solid var(--grey-light);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        /* --- Resume Section --- */
-        .resume-entry {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--grey-light);
-        }
-        .resume-entry span { color: var(--grey-dark); font-size: 0.8rem; }
-
-        /* --- Footer --- */
+        /* FOOTER */
         footer {
-            padding: 5rem 10%;
-            background: var(--black);
-            color: var(--white);
+            padding: 100px 10%;
+            background: #000;
+            color: #fff;
             text-align: center;
         }
+        .footer-big-text { font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; text-transform: uppercase; margin-bottom: 50px; display: block; color: white; text-decoration: none;}
+        .footer-details { display: grid; grid-template-columns: 1fr 1fr 1fr; font-size: 0.8rem; letter-spacing: 2px; opacity: 0.6; }
 
-        .contact-link {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            color: var(--white);
-            text-decoration: none;
-            display: block;
-            margin: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .contact-link:hover { color: var(--grey-light); opacity: 0.7; }
-
-        /* --- Reveal --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        /* ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 900px) {
-            .grid, .content-section { grid-template-columns: 1fr; }
-            .line-accent { display: none; }
+        @media (max-width: 1024px) {
+            .project-row, .about-container { grid-template-columns: 1fr; }
+            body::before, body::after { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="line-accent line-left"></div>
-    <div class="line-accent line-left-inner"></div>
-    <div class="line-accent line-right"></div>
-    <div class="line-accent line-right-inner"></div>
-
     <nav>
         <div class="logo">Beatriz Azevedo</div>
         <div class="nav-links">
-            <a href="#work">Work</a>
+            <a href="#work">Projects</a>
             <a href="#about">About</a>
-            <a href="#resume">Resume</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header>
-        <div class="pre-title reveal">Industrial Design</div>
-        <h1 class="reveal">Portfolio<br>2026</h1>
-        <div class="hero-info reveal">
-            <div>
-                <p>Location</p>
-                <span>Brisbane, AU</span>
-            </div>
-            <div>
-                <p>Education</p>
-                <span>QUT Bachelor of ID</span>
-            </div>
-        </div>
+        <div class="hero-subtitle reveal">Industrial Design</div>
+        <div class="hero-title reveal">Portfolio</div>
+        <div class="hero-subtitle reveal">2026</div>
+        <div class="hero-name reveal">Beatriz Azevedo</div>
     </header>
 
-    <div id="work" class="section-header">Selected Projects</div>
-    <section class="grid">
-        <div class="project-card reveal">
-            <img src="speaker-image.jpg" alt="Anko Speaker" class="project-img">
-            <div class="project-details">
-                <p>01 / Analysis</p>
-                <h3>Anko Bluetooth Speaker</h3>
-                <p>CAD Reconstruction & Assembly</p>
+    <div id="work" class="section-label">Selected Projects</div>
+
+    <!-- PROJECT 01: ANKO -->
+    <section class="project-row">
+        <div class="project-info reveal">
+            <div class="project-num">01</div>
+            <h2 class="project-title">Anko Bluetooth<br>Speaker</h2>
+            <p class="project-desc">This project focused on the deconstruction and analysis of a small Bluetooth speaker to gain an understanding of its manufacturing and assembly processes. Recreated through detailed CAD modelling.</p>
+            <div class="skills-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="skill-box">SolidWorks</div>
+                <div class="skill-box">Keyshot</div>
             </div>
         </div>
-        <div class="project-card reveal">
-            <img src="lamp-image.jpg" alt="Mid Century Lamp" class="project-img">
-            <div class="project-details">
-                <p>02 / UX Interaction</p>
-                <h3>Mid Century Modern Lamp</h3>
-                <p>Experimental Lighting & Prototyping</p>
-            </div>
+        <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1608156639585-b3a032ef9689?q=80&w=1000&auto=format&fit=crop" alt="Speaker">
         </div>
-        <div class="project-card reveal">
-            <img src="bmw-image.jpg" alt="BMW Cover" class="project-img">
-            <div class="project-details">
-                <p>03 / Redesign</p>
-                <h3>BMW M8 Engine Cover</h3>
-                <p>Digital Design Language Redesign</p>
-            </div>
+    </section>
+
+    <!-- PROJECT 02: LAMP -->
+    <section class="project-row">
+        <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?q=80&w=1000&auto=format&fit=crop" alt="Lamp">
         </div>
-        <div class="project-card reveal">
-            <img src="scooter-image.jpg" alt="Mini Scooter" class="project-img">
-            <div class="project-details">
-                <p>04 / Concept</p>
-                <h3>Mini Scooter Concept</h3>
-                <p>Ergonomics & Micromobility</p>
+        <div class="project-info reveal">
+            <div class="project-num">02</div>
+            <h2 class="project-title">Mid Century<br>Modern Lamp</h2>
+            <p class="project-desc">Focused on creating an intuitive lighting product. Pairing walnut with bright shades of orange and white, this design achieves a classic Mid Century feel with mechanical user interaction.</p>
+            <div class="skills-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="skill-box">Prototyping</div>
+                <div class="skill-box">CMF Strategy</div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="content-section">
-        <div class="about-text reveal">
+    <!-- PROJECT 03: BMW -->
+    <section class="project-row">
+        <div class="project-info reveal">
+            <div class="project-num">03</div>
+            <h2 class="project-title">BMW M8 Engine<br>Cover Redesign</h2>
+            <p class="project-desc">A redesign of the BMW M8 Competition engine cover reimagining it with the theme of Digital Design. Establishing a visual language that reflects the vehicle's advanced electronic soul.</p>
+            <div class="skill-box" style="width: fit-content; padding: 15px 40px;">Industrial Design Language</div>
+        </div>
+        <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1000&auto=format&fit=crop" alt="BMW">
+        </div>
+    </section>
+
+    <!-- PROJECT 04: SCOOTER -->
+    <section class="project-row">
+        <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e90?q=80&w=1000&auto=format&fit=crop" alt="Scooter">
+        </div>
+        <div class="project-info reveal">
+            <div class="project-num">04</div>
+            <h2 class="project-title">Mini Scooter<br>Concept</h2>
+            <p class="project-desc">Translating MINI's automotive personality into a micromobility vehicle. Consideration of ergonomics, human factors, and human-machine interaction.</p>
+            <div class="skill-box" style="width: fit-content; padding: 15px 40px;">Micromobility Concept</div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-container">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop" class="about-image" alt="Beatriz Azevedo">
+        <div class="about-content reveal">
             <h2>About Me</h2>
             <p>I am a fourth-year Industrial Design student at the Queensland University of Technology, originally from Brazil.</p>
-            <p>I aim to create products that are purposeful, intuitive, and manufacturable, balancing creative thinking with technical execution.</p>
+            <p>My work spans the full design process, from research and sketching to detailed CAD modelling, prototyping, and rendering. I aim to create products that are purposeful, intuitive, and manufacturable.</p>
             
             <div class="skills-grid">
-                <div class="skill-item">SolidWorks</div>
-                <div class="skill-item">Keyshot</div>
-                <div class="skill-item">Fusion 360</div>
-                <div class="skill-item">Adobe Suite</div>
-                <div class="skill-item">Maya</div>
-                <div class="skill-item">Figma</div>
-            </div>
-        </div>
-        <div id="resume" class="resume-list reveal">
-            <h2>Experience & Awards</h2>
-            <div class="resume-entry">
-                <span>2023</span>
-                <p>Visualisation Award DYB102 | QUT</p>
-            </div>
-            <div class="resume-entry">
-                <span>2025 - Present</span>
-                <p>Senior Sales Assistant | Putt Putt Golf</p>
-            </div>
-            <div class="resume-entry">
-                <span>2023 - Present</span>
-                <p>Events Assistant | Gold Coast Convention Centre</p>
-            </div>
-            <div class="resume-entry">
-                <span>2022</span>
-                <p>Vocational Student of the Year Award</p>
+                <div class="skill-box">SolidWorks</div>
+                <div class="skill-box">Fusion 360</div>
+                <div class="skill-box">Adobe PS/ID</div>
+                <div class="skill-box">Maya</div>
+                <div class="skill-box">Figma</div>
+                <div class="skill-box">Keyshot</div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT / FOOTER -->
     <footer id="contact">
-        <p class="pre-title" style="color:white">Get in touch</p>
-        <a href="mailto:beatriz.azvd01@gmail.com" class="contact-link">beatriz.azvd01@gmail.com</a>
-        <p>0406 548 685</p>
-        <div style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.5;">
-            LinkedIn / Behance / Brisbane, Australia
+        <a href="mailto:beatriz.azvd01@gmail.com" class="footer-big-text reveal">Thank You!</a>
+        <div class="footer-details">
+            <div>Email: beatriz.azvd01@gmail.com</div>
+            <div>Brisbane, Australia</div>
+            <div>0406 548 685</div>
         </div>
     </footer>
 
     <script>
+        // Scroll Reveal Logic
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -335,7 +258,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Initial check
+        reveal(); // Initial call
     </script>
 </body>
 </html>
