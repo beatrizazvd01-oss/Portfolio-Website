@@ -3,67 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industrial Designer | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Beatriz Azevedo | Industrial Design Portfolio</title>
     <style>
         :root {
-            --black: #000000;
+            --black: #1a1a1a;
+            --grey-dark: #4a4a4a;
+            --grey-light: #f0f0f0;
             --white: #ffffff;
-            --grey-light: #f4f4f4;
-            --grey-mid: #808080;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             background-color: var(--white);
             color: var(--black);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
+
+        /* --- Industrial Line Accents (from cover) --- */
+        .line-accent {
+            position: fixed;
+            top: 2rem;
+            bottom: 2rem;
+            width: 1px;
+            background: var(--black);
+            z-index: 1001;
+        }
+        .line-left { left: 2.5%; }
+        .line-left-inner { left: 3%; }
+        .line-right { right: 2.5%; }
+        .line-right-inner { right: 3%; }
 
         /* --- Navigation --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 5%;
+            padding: 2.5rem 10%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: baseline;
             z-index: 1000;
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-weight: 800;
-            text-transform: uppercase;
+            font-weight: 700;
             letter-spacing: 2px;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--black);
-            margin-left: 2.5rem;
-            font-size: 0.9rem;
+            margin-left: 2rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--grey-mid);
-        }
+        .nav-links a:hover { color: var(--grey-dark); border-bottom: 1px solid var(--black); }
 
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         header {
             height: 100vh;
             display: flex;
@@ -72,43 +82,45 @@
             padding: 0 10%;
         }
 
+        .pre-title { font-size: 0.9rem; letter-spacing: 5px; color: var(--grey-dark); text-transform: uppercase; margin-bottom: 1rem; }
+        
         h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 2rem;
-        }
-
-        .hero-desc {
-            max-width: 600px;
-            color: var(--grey-mid);
-            font-size: 1.2rem;
-        }
-
-        /* --- Project Grid --- */
-        .section-label {
-            padding: 0 10%;
-            font-size: 0.8rem;
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--grey-mid);
-            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-info {
+            display: flex;
+            margin-top: 2rem;
+            gap: 4rem;
+        }
+
+        .hero-info div p { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+
+        /* --- Projects Grid --- */
+        .section-header {
+            padding: 4rem 10% 2rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 1px solid var(--grey-light);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2px; /* Industrial thin line look */
-            background-color: var(--grey-light);
-            border-top: 1px solid var(--grey-light);
-            border-bottom: 1px solid var(--grey-light);
+            grid-template-columns: repeat(2, 1fr);
+            border-left: 1px solid var(--grey-light);
         }
 
         .project-card {
-            background-color: var(--white);
+            border-right: 1px solid var(--grey-light);
+            border-bottom: 1px solid var(--grey-light);
             position: relative;
+            aspect-ratio: 16 / 10;
             overflow: hidden;
-            aspect-ratio: 1 / 1;
             cursor: pointer;
         }
 
@@ -120,165 +132,210 @@
             transition: var(--transition);
         }
 
-        .project-overlay {
+        .project-details {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            background: linear-gradient(transparent, rgba(255,255,255,0.9));
-            transform: translateY(100%);
+            bottom: 2rem;
+            left: 2rem;
+            opacity: 0;
             transition: var(--transition);
         }
 
-        .project-card:hover .project-img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
+        .project-details h3 { text-transform: uppercase; font-size: 1.5rem; }
+        .project-details p { font-size: 0.8rem; color: var(--grey-dark); letter-spacing: 1px; }
 
-        .project-card:hover .project-overlay {
-            transform: translateY(0);
-        }
+        .project-card:hover .project-img { transform: scale(1.03); filter: grayscale(0%); opacity: 0.2; }
+        .project-card:hover .project-details { opacity: 1; transform: translateY(-10px); }
 
-        /* --- About Section --- */
-        .about {
-            padding: 10rem 10%;
+        /* --- About & Skills --- */
+        .content-section {
+            padding: 8rem 10%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            gap: 10%;
         }
 
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+        .about-text h2 { font-size: 2rem; margin-bottom: 2rem; text-transform: uppercase; }
+        .about-text p { margin-bottom: 1.5rem; color: var(--grey-dark); font-size: 1.1rem; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .about-image {
-            background: var(--grey-light);
-            height: 500px;
-            width: 100%;
-            /* Placeholder for your portrait or studio */
+        .skill-item {
+            padding: 1rem;
+            border: 1px solid var(--grey-light);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
-        /* --- Reveal Animation --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+        /* --- Resume Section --- */
+        .resume-entry {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--grey-light);
         }
+        .resume-entry span { color: var(--grey-dark); font-size: 0.8rem; }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        /* --- Footer --- */
         footer {
             padding: 5rem 10%;
-            border-top: 1px solid var(--grey-light);
-            display: flex;
-            justify-content: space-between;
-            color: var(--grey-mid);
-            font-size: 0.8rem;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
         }
 
-        @media (max-width: 768px) {
-            .about { grid-template-columns: 1fr; }
-            .grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+        .contact-link {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover { color: var(--grey-light); opacity: 0.7; }
+
+        /* --- Reveal --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .grid, .content-section { grid-template-columns: 1fr; }
+            .line-accent { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <div class="line-accent line-left"></div>
+    <div class="line-accent line-left-inner"></div>
+    <div class="line-accent line-right"></div>
+    <div class="line-accent line-right-inner"></div>
+
     <nav>
-        <div class="logo">Designer Name</div>
+        <div class="logo">Beatriz Azevedo</div>
         <div class="nav-links">
             <a href="#work">Work</a>
             <a href="#about">About</a>
+            <a href="#resume">Resume</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <header>
-        <h1 class="reveal">Form. Function.<br>Precision.</h1>
-        <p class="hero-desc reveal">I am an Industrial Designer focused on creating hardware products that bridge the gap between human ergonomics and technical performance.</p>
+        <div class="pre-title reveal">Industrial Design</div>
+        <h1 class="reveal">Portfolio<br>2026</h1>
+        <div class="hero-info reveal">
+            <div>
+                <p>Location</p>
+                <span>Brisbane, AU</span>
+            </div>
+            <div>
+                <p>Education</p>
+                <span>QUT Bachelor of ID</span>
+            </div>
+        </div>
     </header>
 
-    <div id="work" class="section-label reveal">Selected Projects / 2023-2024</div>
-    
+    <div id="work" class="section-header">Selected Projects</div>
     <section class="grid">
-        <!-- Project 1 -->
         <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000" alt="Project" class="project-img">
-            <div class="project-overlay">
-                <h3>Acoustic Series 01</h3>
-                <p>Minimalist Studio Headphones</p>
+            <img src="speaker-image.jpg" alt="Anko Speaker" class="project-img">
+            <div class="project-details">
+                <p>01 / Analysis</p>
+                <h3>Anko Bluetooth Speaker</h3>
+                <p>CAD Reconstruction & Assembly</p>
             </div>
         </div>
-        <!-- Project 2 -->
         <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1000" alt="Project" class="project-img">
-            <div class="project-overlay">
-                <h3>Lunar Watch</h3>
-                <p>Anodized Aluminum Timepiece</p>
+            <img src="lamp-image.jpg" alt="Mid Century Lamp" class="project-img">
+            <div class="project-details">
+                <p>02 / UX Interaction</p>
+                <h3>Mid Century Modern Lamp</h3>
+                <p>Experimental Lighting & Prototyping</p>
             </div>
         </div>
-        <!-- Project 3 -->
         <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" alt="Project" class="project-img">
-            <div class="project-overlay">
-                <h3>V02 Toolset</h3>
-                <p>Precision Machined Hand Tools</p>
+            <img src="bmw-image.jpg" alt="BMW Cover" class="project-img">
+            <div class="project-details">
+                <p>03 / Redesign</p>
+                <h3>BMW M8 Engine Cover</h3>
+                <p>Digital Design Language Redesign</p>
             </div>
         </div>
-        <!-- Project 4 -->
         <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1526733158173-e6b0a79105a8?auto=format&fit=crop&q=80&w=1000" alt="Project" class="project-img">
-            <div class="project-overlay">
-                <h3>Iris Lamp</h3>
-                <p>Kinetic Lighting Solution</p>
+            <img src="scooter-image.jpg" alt="Mini Scooter" class="project-img">
+            <div class="project-details">
+                <p>04 / Concept</p>
+                <h3>Mini Scooter Concept</h3>
+                <p>Ergonomics & Micromobility</p>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="content-section">
         <div class="about-text reveal">
-            <div class="section-label" style="padding:0; margin-bottom: 1rem;">The Approach</div>
-            <h2>Design is the search for a better way of doing things.</h2>
-            <p>I specialize in product strategy, CAD development, and rapid prototyping. My process is driven by material honesty and user-centric problem solving.</p>
-            <br>
-            <p>Based in Berlin, working globally.</p>
+            <h2>About Me</h2>
+            <p>I am a fourth-year Industrial Design student at the Queensland University of Technology, originally from Brazil.</p>
+            <p>I aim to create products that are purposeful, intuitive, and manufacturable, balancing creative thinking with technical execution.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-item">SolidWorks</div>
+                <div class="skill-item">Keyshot</div>
+                <div class="skill-item">Fusion 360</div>
+                <div class="skill-item">Adobe Suite</div>
+                <div class="skill-item">Maya</div>
+                <div class="skill-item">Figma</div>
+            </div>
         </div>
-        <div class="about-image reveal">
-            <!-- Add an image of yourself or your studio here -->
-            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000" style="width:100%; height:100%; object-fit:cover; filter:grayscale(100%)">
+        <div id="resume" class="resume-list reveal">
+            <h2>Experience & Awards</h2>
+            <div class="resume-entry">
+                <span>2023</span>
+                <p>Visualisation Award DYB102 | QUT</p>
+            </div>
+            <div class="resume-entry">
+                <span>2025 - Present</span>
+                <p>Senior Sales Assistant | Putt Putt Golf</p>
+            </div>
+            <div class="resume-entry">
+                <span>2023 - Present</span>
+                <p>Events Assistant | Gold Coast Convention Centre</p>
+            </div>
+            <div class="resume-entry">
+                <span>2022</span>
+                <p>Vocational Student of the Year Award</p>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <div>© 2024 Designer Name</div>
-        <div>Available for collaborations</div>
-        <div>Instagram / LinkedIn / Behance</div>
+    <footer id="contact">
+        <p class="pre-title" style="color:white">Get in touch</p>
+        <a href="mailto:beatriz.azvd01@gmail.com" class="contact-link">beatriz.azvd01@gmail.com</a>
+        <p>0406 548 685</p>
+        <div style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.5;">
+            LinkedIn / Behance / Brisbane, Australia
+        </div>
     </footer>
 
     <script>
-        // Scroll Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add("active");
                 }
             }
         }
-
         window.addEventListener("scroll", reveal);
-        // Initial check
-        reveal();
+        reveal(); // Initial check
     </script>
 </body>
 </html>
