@@ -1,0 +1,47 @@
+/* Minimalist Portfolio Reset */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* Big Hero Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns like Benjamin's */
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; } /* Stack on mobile */
+}
+
+/* Project Styling */
+.project-card {
+    margin-bottom: 40px;
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(20%); /* Adds that industrial, moody feel */
+    transition: filter 0.3s ease;
+}
+
+.project-card img:hover {
+    filter: grayscale(0%);
+}
+
+.project-info {
+    padding: 15px 0;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
