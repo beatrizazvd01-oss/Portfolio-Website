@@ -1,264 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beatriz Azevedo | Portfolio 2026</title>
-    <style>
-        /* CSS RESET & THEME */
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --grey-light: #f2f2f2;
-            --grey-mid: #666666;
-            --line-weight: 1px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Beatriz Azevedo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --white: #ffffff;
+  --bg: #f7f6f4;
+  --rule: #e2e0dc;
+  --mid: #9a9690;
+  --dark: #3c3a36;
+  --black: #1a1816;
+}
 
-        body {
-            background-color: var(--white);
-            color: var(--black);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+html { scroll-behavior: smooth; }
 
-        /* THE DOUBLE LINE BORDER (From your Cover Page) */
-        body::before, body::after {
-            content: "";
-            position: fixed;
-            top: 5vh;
-            bottom: 5vh;
-            width: var(--line-weight);
-            background: var(--black);
-            z-index: 100;
-        }
-        body::before { left: 40px; box-shadow: 8px 0 0 var(--black); } /* Double line left */
-        body::after { right: 40px; box-shadow: -8px 0 0 var(--black); } /* Double line right */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
 
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 50px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(5px);
-        }
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  height: 56px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
 
-        .logo { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
-        .nav-links a { text-decoration: none; color: var(--black); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; margin-left: 30px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--grey-mid); }
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--black);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
 
-        /* HERO SECTION */
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 15%;
-        }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
 
-        .hero-title { font-size: clamp(4rem, 12vw, 9rem); font-weight: 900; line-height: 0.8; letter-spacing: -4px; text-transform: uppercase; }
-        .hero-subtitle { margin-top: 20px; letter-spacing: 10px; text-transform: uppercase; font-size: 0.8rem; color: var(--grey-mid); }
-        .hero-name { margin-top: 40px; letter-spacing: 5px; font-weight: 300; text-transform: uppercase; font-size: 1.1rem; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.18s;
+}
 
-        /* SECTION HEADERS */
-        .section-label { padding: 150px 10% 30px; font-size: 2rem; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #eee; }
+.nav-links a:hover,
+.nav-links a.active { color: var(--black); }
 
-        /* PROJECT GRID */
-        .project-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-bottom: 1px solid #eee;
-            min-height: 80vh;
-        }
+/* ── PAGE HEADER ── */
+.page-header {
+  padding: 120px 32px 56px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-        .project-info { padding: 10%; display: flex; flex-direction: column; justify-content: center; }
-        .project-num { font-size: 5rem; font-weight: 900; color: #e0e0e0; line-height: 1; margin-bottom: 10px; }
-        .project-title { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
-        .project-desc { color: var(--grey-mid); line-height: 1.6; font-size: 1rem; margin-bottom: 30px; }
-        
-        .project-visual { 
-            position: relative; 
-            overflow: hidden; 
-            background: #fafafa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .project-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .project-row:hover .project-visual img { filter: grayscale(0%); transform: scale(1.05); }
+.page-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
 
-        /* ABOUT SECTION */
-        .about-container {
-            padding: 150px 10%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-        }
-        .about-image { width: 100%; filter: grayscale(100%); border: 1px solid #eee; }
-        .about-content h2 { font-size: 3rem; text-transform: uppercase; margin-bottom: 30px; }
-        .about-content p { font-size: 1.1rem; color: var(--grey-mid); margin-bottom: 20px; line-height: 1.8; }
+.page-header-meta {
+  font-size: 12px;
+  color: var(--mid);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 2;
+}
 
-        /* SKILLS ICONS (Text based for now) */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 50px;
-        }
-        .skill-box { border: 1px solid #000; padding: 15px; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; text-align: center; }
+/* ── CONTENT ── */
+.resume-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 80vh;
+}
 
-        /* FOOTER */
-        footer {
-            padding: 100px 10%;
-            background: #000;
-            color: #fff;
-            text-align: center;
-        }
-        .footer-big-text { font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; text-transform: uppercase; margin-bottom: 50px; display: block; color: white; text-decoration: none;}
-        .footer-details { display: grid; grid-template-columns: 1fr 1fr 1fr; font-size: 0.8rem; letter-spacing: 2px; opacity: 0.6; }
+/* Sidebar */
+.resume-sidebar {
+  padding: 48px 32px;
+  border-right: 1px solid var(--rule);
+  position: sticky;
+  top: 56px;
+  height: fit-content;
+}
 
-        /* ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(50px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+.sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-        @media (max-width: 1024px) {
-            .project-row, .about-container { grid-template-columns: 1fr; }
-            body::before, body::after { display: none; }
-        }
-    </style>
+.sidebar-nav a {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.18s, border-color 0.18s;
+}
+
+.sidebar-nav a:hover { color: var(--black); border-bottom-color: var(--rule); }
+
+/* Main content */
+.resume-main {
+  padding: 48px 48px 96px;
+}
+
+/* Each section */
+.resume-section {
+  padding-bottom: 64px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.resume-section:last-child {
+  border-bottom: none;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 32px;
+}
+
+/* Experience / Education rows */
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.entry:first-child { border-top: none; }
+
+.entry-date {
+  font-size: 12px;
+  color: var(--mid);
+  letter-spacing: 0.04em;
+  padding-top: 2px;
+}
+
+.entry-content {}
+
+.entry-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.entry-org {
+  font-size: 14px;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.entry-note {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* Skills grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 4px;
+}
+
+.skill-cell {
+  background: var(--white);
+  padding: 20px 24px;
+}
+
+.skill-cell-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  color: var(--dark);
+  background: var(--bg);
+}
+
+/* Contact section */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.contact-item {}
+
+.contact-label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 8px;
+}
+
+.contact-value {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.contact-value a {
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.18s;
+}
+
+.contact-value a:hover {
+  border-color: var(--black);
+}
+
+/* Big intro quote */
+.resume-intro {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--dark);
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.resume-intro em {
+  font-style: italic;
+  color: var(--mid);
+}
+
+/* back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  margin-bottom: 48px;
+  transition: color 0.18s;
+}
+.back-link:hover { color: var(--black); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left { font-size: 12px; color: var(--mid); }
+
+.footer-right {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-right a {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.footer-right a:hover { color: var(--black); }
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .page-header { flex-direction: column; gap: 16px; padding: 100px 20px 40px; }
+  .page-header-meta { text-align: left; }
+  .resume-body { grid-template-columns: 1fr; }
+  .resume-sidebar { display: none; }
+  .resume-main { padding: 32px 20px 64px; }
+  .entry { grid-template-columns: 1fr; gap: 6px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+  footer { flex-direction: column; gap: 12px; }
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Beatriz Azevedo</div>
-        <div class="nav-links">
-            <a href="#work">Projects</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Beatriz Azevedo</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Work</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- HERO SECTION -->
-    <header>
-        <div class="hero-subtitle reveal">Industrial Design</div>
-        <div class="hero-title reveal">Portfolio</div>
-        <div class="hero-subtitle reveal">2026</div>
-        <div class="hero-name reveal">Beatriz Azevedo</div>
-    </header>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1 class="page-title">Resume</h1>
+  <div class="page-header-meta">
+    Industrial Design<br>
+    QUT Brisbane · 2026
+  </div>
+</div>
 
-    <div id="work" class="section-label">Selected Projects</div>
+<!-- BODY -->
+<div class="resume-body">
 
-    <!-- PROJECT 01: ANKO -->
-    <section class="project-row">
-        <div class="project-info reveal">
-            <div class="project-num">01</div>
-            <h2 class="project-title">Anko Bluetooth<br>Speaker</h2>
-            <p class="project-desc">This project focused on the deconstruction and analysis of a small Bluetooth speaker to gain an understanding of its manufacturing and assembly processes. Recreated through detailed CAD modelling.</p>
-            <div class="skills-grid" style="grid-template-columns: repeat(2, 1fr);">
-                <div class="skill-box">SolidWorks</div>
-                <div class="skill-box">Keyshot</div>
-            </div>
-        </div>
-        <div class="project-visual">
-            <img src="https://images.unsplash.com/photo-1608156639585-b3a032ef9689?q=80&w=1000&auto=format&fit=crop" alt="Speaker">
-        </div>
-    </section>
+  <!-- Sidebar -->
+  <aside class="resume-sidebar">
+    <ul class="sidebar-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
 
-    <!-- PROJECT 02: LAMP -->
-    <section class="project-row">
-        <div class="project-visual">
-            <img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?q=80&w=1000&auto=format&fit=crop" alt="Lamp">
-        </div>
-        <div class="project-info reveal">
-            <div class="project-num">02</div>
-            <h2 class="project-title">Mid Century<br>Modern Lamp</h2>
-            <p class="project-desc">Focused on creating an intuitive lighting product. Pairing walnut with bright shades of orange and white, this design achieves a classic Mid Century feel with mechanical user interaction.</p>
-            <div class="skills-grid" style="grid-template-columns: repeat(2, 1fr);">
-                <div class="skill-box">Prototyping</div>
-                <div class="skill-box">CMF Strategy</div>
-            </div>
-        </div>
-    </section>
+  <!-- Main -->
+  <main class="resume-main">
 
-    <!-- PROJECT 03: BMW -->
-    <section class="project-row">
-        <div class="project-info reveal">
-            <div class="project-num">03</div>
-            <h2 class="project-title">BMW M8 Engine<br>Cover Redesign</h2>
-            <p class="project-desc">A redesign of the BMW M8 Competition engine cover reimagining it with the theme of Digital Design. Establishing a visual language that reflects the vehicle's advanced electronic soul.</p>
-            <div class="skill-box" style="width: fit-content; padding: 15px 40px;">Industrial Design Language</div>
-        </div>
-        <div class="project-visual">
-            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1000&auto=format&fit=crop" alt="BMW">
-        </div>
-    </section>
+    <a href="index.html" class="back-link">← Back to work</a>
 
-    <!-- PROJECT 04: SCOOTER -->
-    <section class="project-row">
-        <div class="project-visual">
-            <img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e90?q=80&w=1000&auto=format&fit=crop" alt="Scooter">
-        </div>
-        <div class="project-info reveal">
-            <div class="project-num">04</div>
-            <h2 class="project-title">Mini Scooter<br>Concept</h2>
-            <p class="project-desc">Translating MINI's automotive personality into a micromobility vehicle. Consideration of ergonomics, human factors, and human-machine interaction.</p>
-            <div class="skill-box" style="width: fit-content; padding: 15px 40px;">Micromobility Concept</div>
-        </div>
-    </section>
+    <!-- About -->
+    <div class="resume-section" id="about">
+      <p class="section-eyebrow">About</p>
+      <p class="resume-intro">
+        A fourth-year Industrial Design student at QUT,
+        <em>originally from Brazil.</em> I work across the full
+        design process — from research and sketching to
+        CAD modelling, prototyping, and rendering —
+        with a focus on user experience and sustainability.
+      </p>
+    </div>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="about-container">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop" class="about-image" alt="Beatriz Azevedo">
-        <div class="about-content reveal">
-            <h2>About Me</h2>
-            <p>I am a fourth-year Industrial Design student at the Queensland University of Technology, originally from Brazil.</p>
-            <p>My work spans the full design process, from research and sketching to detailed CAD modelling, prototyping, and rendering. I aim to create products that are purposeful, intuitive, and manufacturable.</p>
-            
-            <div class="skills-grid">
-                <div class="skill-box">SolidWorks</div>
-                <div class="skill-box">Fusion 360</div>
-                <div class="skill-box">Adobe PS/ID</div>
-                <div class="skill-box">Maya</div>
-                <div class="skill-box">Figma</div>
-                <div class="skill-box">Keyshot</div>
-            </div>
+    <!-- Experience -->
+    <div class="resume-section" id="experience">
+      <p class="section-eyebrow">Experience</p>
+      <div class="entry-list">
+        <div class="entry">
+          <span class="entry-date">Feb 2025 – Present</span>
+          <div class="entry-content">
+            <p class="entry-title">Senior Sales Assistant</p>
+            <p class="entry-org">Putt Putt Golf Mermaid Beach</p>
+          </div>
         </div>
-    </section>
-
-    <!-- CONTACT / FOOTER -->
-    <footer id="contact">
-        <a href="mailto:beatriz.azvd01@gmail.com" class="footer-big-text reveal">Thank You!</a>
-        <div class="footer-details">
-            <div>Email: beatriz.azvd01@gmail.com</div>
-            <div>Brisbane, Australia</div>
-            <div>0406 548 685</div>
+        <div class="entry">
+          <span class="entry-date">Jun 2023 – Present</span>
+          <div class="entry-content">
+            <p class="entry-title">Events Assistant</p>
+            <p class="entry-org">Gold Coast Convention and Exhibition Centre</p>
+          </div>
         </div>
-    </footer>
+        <div class="entry">
+          <span class="entry-date">Aug 2021 – Oct 2023</span>
+          <div class="entry-content">
+            <p class="entry-title">Team Member</p>
+            <p class="entry-org">The Yiros Shop</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <script>
-        // Scroll Reveal Logic
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Initial call
-    </script>
+    <!-- Education -->
+    <div class="resume-section" id="education">
+      <p class="section-eyebrow">Education</p>
+      <div class="entry-list">
+        <div class="entry">
+          <span class="entry-date">Feb 2023 – Present</span>
+          <div class="entry-content">
+            <p class="entry-title">Bachelor of Industrial Design</p>
+            <p class="entry-org">Queensland University of Technology</p>
+            <p class="entry-note">Year 4 — Brisbane, Australia</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="entry-date">Jul 2020 – Nov 2022</span>
+          <div class="entry-content">
+            <p class="entry-title">Queensland Certificate of Education</p>
+            <p class="entry-org">Miami State High School</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="entry-date">Feb 2021 – Nov 2021</span>
+          <div class="entry-content">
+            <p class="entry-title">Certificate II in Animal Studies</p>
+            <p class="entry-org">TAFE Queensland</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="resume-section" id="achievements">
+      <p class="section-eyebrow">Achievements</p>
+      <div class="entry-list">
+        <div class="entry">
+          <span class="entry-date">Semester 2, 2023</span>
+          <div class="entry-content">
+            <p class="entry-title">Visualisation Award — DYB102</p>
+            <p class="entry-org">Queensland University of Technology</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="entry-date">Year 12, 2022</span>
+          <div class="entry-content">
+            <p class="entry-title">Vocational Student of the Year</p>
+            <p class="entry-org">Miami State High School</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="resume-section" id="skills">
+      <p class="section-eyebrow">Skills & Software</p>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <p class="skill-cell-label">3D CAD</p>
+          <div class="skill-tags">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Fusion 360</span>
+            <span class="skill-tag">Maya</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cell-label">Rendering</p>
+          <div class="skill-tags">
+            <span class="skill-tag">KeyShot</span>
+            <span class="skill-tag">V-Ray</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cell-label">Adobe Creative</p>
+          <div class="skill-tags">
+            <span class="skill-tag">InDesign</span>
+            <span class="skill-tag">Photoshop</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cell-label">Design & UI</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Pencil (sketching)</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cell-label">Process</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Research</span>
+            <span class="skill-tag">Sketching</span>
+            <span class="skill-tag">CMF</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cell-label">Fabrication</p>
+          <div class="skill-tags">
+            <span class="skill-tag">FDM Printing</span>
+            <span class="skill-tag">Woodworking</span>
+            <span class="skill-tag">Vacuum Forming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="resume-section" id="contact">
+      <p class="section-eyebrow">Contact</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p class="contact-label">Email</p>
+          <p class="contact-value"><a href="mailto:beatriz.azvd01@gmail.com">beatriz.azvd01@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-label">Phone</p>
+          <p class="contact-value"><a href="tel:0406548685">0406 548 685</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-label">LinkedIn</p>
+          <p class="contact-value"><a href="#">View profile →</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-label">Behance</p>
+          <p class="contact-value"><a href="#">View profile →</a></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left">© 2026 Beatriz Azevedo</span>
+  <div class="footer-right">
+    <a href="index.html">Work</a>
+    <a href="mailto:beatriz.azvd01@gmail.com">Email</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Behance</a>
+  </div>
+</footer>
+
 </body>
 </html>
